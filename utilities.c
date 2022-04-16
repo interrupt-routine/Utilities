@@ -184,45 +184,6 @@ char *strdup (const char *string)
 	return strcpy(malloc(strlen(string) + 1), string);
 }
 
-int asprintf (char **string_ptr, const char *format, ...)
-{
-	*string_ptr = NULL;
-
-	va_list args;
-
-	va_start(args, format);
-	int nb_chars = vsnprintf(NULL, 0, format, args);
-	va_end(args);
-
-	if (nb_chars == -1)
-		return -1;
-
-	*string_ptr = malloc(nb_chars + 1);
-
-	va_start(args, format);
-	int retval = vsprintf(*string_ptr, format, args);
-	va_end(args);
-
-	return retval;
-}
-
-int vasprintf (char **string_ptr, const char *format, va_list arg)
-{
-	va_list copy;
-	va_copy(copy, arg);
-
-	int nb_chars = vsnprintf(NULL, 0, format, arg);
-
-	*string_ptr = malloc(nb_chars + 1);
-
-	int retval = vsprintf(*string_ptr, format, copy);
-	va_end(copy);
-
-	return retval;
-}
-
-
-
 
 
 
