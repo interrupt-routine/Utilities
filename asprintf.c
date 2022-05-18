@@ -13,7 +13,7 @@ int vasprintf (char **string_ptr, const char *format, va_list args)
 	if (nb_chars < 0)
 		return nb_chars;
 
-// we use another pointer in case *string_ptr is used also used as a format argument
+// we use another pointer in case *string_ptr is also used as a %s argument
 // otherwise, there would be overlap
 	char *string = malloc(nb_chars + 1);
 
